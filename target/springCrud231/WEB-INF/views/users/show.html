@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Show</title>
+</head>
+<body>
+
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>LastName</th>
+            <th>Age</th>
+
+        </tr>
+        <tr th:each="user : ${users}">
+
+            <td th:text="${user.getId()}">Id</td>
+            <td th:text="${user.getName()}">Name</td>
+            <td th:text="${user.getLastName()}">Last Name</td>
+            <td th:text="${user.getAge()}">Age</td>
+            <td>
+                <form th:method="put" th:action="@{/edit/{id}(id=${user.id})}" th:object="${user}">
+                    <button type="submit">Change</button>
+                </form>
+            </td>
+<!--            <td>-->
+<!--                <form th:method="delete" th:action="@{/delete/{id}(id=${user.getId()})}">-->
+<!--                    <button type="submit">Delete</button>-->
+<!--                </form>-->
+<!--            </td>-->
+
+            <td>
+                <form th:method="delete" th:action="@{/users/delete/{id}(id=${user.getId()})}">
+                    <input type="submit" value="Delete"/>
+                </form>
+            </td>
+
+        </tr>
+    </table>
+    <br/>
+    <form th:action="@{/}">
+        <button type="submit">Back</button>
+    </form>
+
+</body>
+</html>
