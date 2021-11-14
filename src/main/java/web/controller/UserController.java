@@ -1,5 +1,6 @@
 package web.controller;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,9 +9,26 @@ import org.springframework.web.bind.annotation.*;
 import web.model.User;
 import web.service.Service;
 
+import javax.annotation.PostConstruct;
+
+
 @Controller
 @RequestMapping("/users")
 public class UserController {
+
+    @PostConstruct
+    public void loadTestUser() {
+
+        User user1 = new User("Ivan", "Ivanov", (byte) 20);
+        User user2 = new User("Andrei", "Andreev", (byte) 21);
+        User user3 = new User("Kolia", "Nikolaev", (byte) 22);
+        User user4 = new User("Petr", "Petrov", (byte) 23);
+
+        service.addUser(user1);
+        service.addUser(user2);
+        service.addUser(user3);
+        service.addUser(user4);
+    }
 
     private Service service;
 
